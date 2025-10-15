@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SandrOro – Compro Oro a Domicilio (Nord‑Est) | Pagamento Immediato</title>
+  <meta name="description" content="SandrOro: valutazione oro a domicilio nel Nord‑Est Italia. Pesata in presenza, prezzo basato su quotazione LBMA, pagamenti tracciabili immediati. OAM A123 – TULPS Roma B12345."/>
+  <style>
+    :root{--bg:#0f172a;--fg:#0b1220;--card:#111827;--text:#e5e7eb;--muted:#94a3b8;--accent:#ffd34d;--accent2:#f59e0b;--green:#22c55e;--red:#ef4444;}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:linear-gradient(180deg,#0b1020 0%, #0f172a 100%);color:var(--text)}
+    a{color:var(--accent)}
+    .container{max-width:1080px;margin:0 auto;padding:24px}
+    .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;padding:24px 0}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:#1f2937;border:1px solid #273244;color:#e2e8f0;border-radius:999px;padding:8px 12px;font-size:12px}
+    .title{font-size:clamp(28px,4vw,48px);line-height:1.1;margin:8px 0}
+    .subtitle{font-size:clamp(16px,2.3vw,20px);color:var(--muted);margin:12px 0 18px}
+    .usp{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+    .chip{background:#1f2937;border:1px solid #273244;border-radius:999px;padding:8px 12px;font-size:13px;color:#e2e8f0}
+    .card{background:rgba(17,24,39,.7);border:1px solid #273244;border-radius:16px;padding:18px}
+    .shadow{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .form{display:grid;gap:12px}
+    label{font-size:14px;color:#cbd5e1}
+    input,select,textarea{width:100%;background:#0b1220;border:1px solid #273244;color:#e5e7eb;padding:12px 12px;border-radius:10px;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;background:linear-gradient(90deg,#facc15,#f59e0b);color:#111827;border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .stat{background:#0b1220;border:1px solid #273244;border-radius:14px;padding:14px;text-align:center}
+    .stat h3{margin:6px 0 2px;font-size:22px;color:var(--accent)}
+    .stat p{margin:0;color:#cbd5e1;font-size:13px}
+    .section{padding:28px 0}
+    .list{display:grid;gap:10px}
+    .list li{display:flex;gap:10px;align-items:flex-start}
+    .tick{color:var(--green)}
+    footer{color:#94a3b8;font-size:13px;padding:28px 0;border-top:1px solid #273244;margin-top:20px}
+    .legal{font-size:12px;color:#94a3b8}
+    .logos{display:flex;gap:10px;flex-wrap:wrap}
+    .logos span{border:1px dashed #334155;border-radius:999px;padding:6px 10px;font-size:12px;color:#cbd5e1;background:#0b1220}
+    .ribbon{position:relative;overflow:hidden;border-radius:16px}
+    .ribbon:before{content:"Sicuro a casa tua";position:absolute;top:14px;right:-48px;transform:rotate(35deg);background:#f59e0b;color:#111827;padding:6px 60px;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+  </style>
+  <!-- GTM/GA4 placeholders: sostituisci con i tuoi snippet
+  <script>window.dataLayer = window.dataLayer || [];</script>
+  -->
+  <script>
+    // === CONFIGURAZIONE SITO ===
+    const CONFIG = {
+      NAME: 'GoldAtHome',
+      LEGAL_NAME: 'GoldAtHome Srl',
+      URL: 'https://www.goldathome.it',
+      PHONE: '+39 333 162 1968',
+      PHONE_E164: '+393331621968',
+      WHATSAPP_E164: '+393331621968',
+      OAM: 'A123',
+      OAM_CAT: 'cat.1',
+      TULPS_NUMBER: 'B12345',
+      TULPS_QUESTURA: 'Roma',
+      TULPS_DATE: '01/01/2020',
+      OWNER: 'Sandro DeNagris',
+      ADDRESS: 'Via del Corso 12, Roma',
+      PIVA: '123456789',
+      REA: '12345',
+      SLOGAN: 'Oro come piace a te: sicuro a casa tua.',
+      AREA: 'Nord-Est Italia',
+      // Endpoint temporaneo (gratis) per test lead → Google Apps Script Web App
+      // Lascia vuoto per simulazione; incolla l'URL del tuo Web App per invii reali
+      FORM_ENDPOINT: ''
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Title & meta
+      document.title = `${CONFIG.NAME} – Compro Oro a Domicilio (${CONFIG.AREA}) | Pagamento Immediato`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', `${CONFIG.NAME}: valutazione oro a domicilio nel ${CONFIG.AREA}. Prezzo LBMA, pagamenti tracciabili immediati. OAM ${CONFIG.OAM} – TULPS ${CONFIG.TULPS_QUESTURA} ${CONFIG.TULPS_NUMBER}.`);
+
+      // Badge header
+      const legalName = document.getElementById('legalName');
+      if (legalName) legalName.textContent = CONFIG.LEGAL_NAME;
+      const oam = document.getElementById('oam');
+      if (oam) oam.textContent = `OAM ${CONFIG.OAM} (${CONFIG.OAM_CAT})`;
+      const tulps = document.getElementById('tulps');
+      if (tulps) tulps.textContent = `TULPS ${CONFIG.TULPS_QUESTURA} ${CONFIG.TULPS_NUMBER}`;
+
+      // CTA buttons + labels
+      const telBtn = document.getElementById('telBtn');
+      const phoneLabel = document.getElementById('phoneLabel');
+      if (telBtn) telBtn.href = `tel:${CONFIG.PHONE_E164}`;
+      if (phoneLabel) phoneLabel.textContent = CONFIG.PHONE.replace('+39 ','');
+      const waBtn = document.getElementById('waBtn');
+      if (waBtn) waBtn.href = `https://wa.me/${CONFIG.WHATSAPP_E164.replace('+','')}`;
+
+      // Slogan
+      const slogan = document.getElementById('slogan');
+      if (slogan) slogan.textContent = CONFIG.SLOGAN;
+
+      // Footer details
+      const legalName2 = document.getElementById('legalName2');
+      if (legalName2) legalName2.textContent = CONFIG.LEGAL_NAME;
+      const piva = document.getElementById('piva');
+      if (piva) piva.textContent = CONFIG.PIVA;
+      const rea = document.getElementById('rea');
+      if (rea) rea.textContent = CONFIG.REA;
+      const address = document.getElementById('address');
+      if (address) address.textContent = CONFIG.ADDRESS;
+      const footerOAM = document.getElementById('footerOAM');
+      if (footerOAM) footerOAM.textContent = `Iscrizione OAM ${CONFIG.OAM} (${CONFIG.OAM_CAT})`;
+      const footerTULPS = document.getElementById('footerTULPS');
+      if (footerTULPS) footerTULPS.textContent = `Licenza TULPS ${CONFIG.TULPS_QUESTURA} ${CONFIG.TULPS_NUMBER} (${CONFIG.TULPS_DATE}) — Intestatario: ${CONFIG.OWNER}`;
+
+      // Links in thank-you state
+      const telSpan = document.getElementById('telSpan');
+      const waSpan = document.getElementById('waSpan');
+      if (telSpan) telSpan.href = `tel:${CONFIG.PHONE_E164}`;
+      if (waSpan) waSpan.href = `https://wa.me/${CONFIG.WHATSAPP_E164.replace('+','')}`;
+
+      // JSON-LD overwrite with CONFIG
+      const ld = document.querySelector('script[type="application/ld+json"]');
+      if (ld) {
+        const json = {
+          "@context":"https://schema.org",
+          "@type":"JewelryStore",
+          "name": `${CONFIG.NAME} – Compro Oro a Domicilio`,
+          "slogan": CONFIG.SLOGAN,
+          "url": CONFIG.URL,
+          "telephone": CONFIG.PHONE,
+          "areaServed": CONFIG.AREA,
+          "address": {"@type":"PostalAddress","streetAddress": CONFIG.ADDRESS, "addressCountry":"IT"},
+          "knowsAbout":["compro oro","oro da investimento","valutazione oro","servizio a domicilio","LBMA"],
+          "paymentAccepted":["Credit Card","Debit Card","Bank Transfer","Check","Cash (<500€)"],
+          "currenciesAccepted":"EUR"
+        };
+        ld.textContent = JSON.stringify(json);
+      }
+    });
+  </script>
+</head>
+<body>
+  <header class="container" role="banner">
+    <div class="badge" aria-label="Identità e conformità">
+      <span id="legalName">SandrOro Srl</span>
+      <span>•</span>
+      <span id="oam">OAM A123 (cat.1)</span>
+      <span>•</span>
+      <span id="tulps">TULPS Roma B12345</span>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1 class="title">Compro Oro <span style="color:var(--accent)">a Domicilio</span> nel Nord‑Est</h1>
+        <p class="subtitle">Pesata in presenza, prezzo da quotazione <strong>LBMA</strong>, pagamento <strong>immediato</strong> e tracciabile. Orari anche serali e week‑end.</p>
+        <div class="usp">
+          <span class="chip">Pagamento immediato</span>
+          <span class="chip">Prezzo trasparente (€/g per titolo)</span>
+          <span class="chip">Scheda operazione con foto</span>
+          <span class="chip">Fermo 10 giorni a norma</span>
+        </div>
+        <div class="logos" aria-label="metalli trattati">
+          <span>Oro 24k–8k</span><span>Argento</span><span>Platino</span><span>Monete</span><span>Lingotti</span>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a id="telBtn" class="btn" href="tel:+393331621968" aria-label="Chiama">Chiama <span id="phoneLabel">333 162 1968</span></a>
+          <a id="waBtn" class="btn" href="https://wa.me/393331621968" aria-label="Scrivi su WhatsApp">WhatsApp</a>
+          <a class="btn" href="#form" aria-label="Prenota una valutazione a domicilio">Prenota valutazione</a>
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">Slogan: <em id="slogan">“Oro come piace a te: sicuro a casa tua.”</em></div>
+      </div>
+
+      <!-- FORM CARD -->
+      <aside id="form" class="card shadow ribbon" aria-label="Modulo di prenotazione valutazione a domicilio">
+        <h2 style="margin:0 0 6px">Prenota la visita a domicilio</h2>
+        <p class="subtitle" style="margin:0 0 12px">Risposta entro 15 minuti negli orari attivi.</p>
+        <form id="leadForm" class="form" novalidate>
+          <div class="row">
+            <div>
+              <label for="name">Nome e Cognome</label>
+              <input id="name" name="name" required placeholder="Es. Maria Rossi"/>
+            </div>
+            <div>
+              <label for="phone">Telefono (richiesto)</label>
+              <input id="phone" name="phone" required inputmode="tel" placeholder="Es. 333 123 4567"/>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="nome@email.it"/>
+            </div>
+            <div>
+              <label for="area">Comune / Provincia</label>
+              <input id="area" name="area" placeholder="Es. Trieste (TS)"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="quantita">Quantità o valore stimato</label>
+              <select id="quantita" name="quantita" required>
+                <option value="" selected>Seleziona…</option>
+                <option value="<100€">Meno di 100 €</option>
+                <option value="100-500€">100–500 €</option>
+                <option value=">500€">Oltre 500 €</option>
+                <option value=">2000€">Oltre 2.000 €</option>
+              </select>
+            </div>
+            <div>
+              <label for="tempistica">Se l’offerta è chiara, concludi in visita?</label>
+              <select id="tempistica" name="tempistica" required>
+                <option value="" selected>Seleziona…</option>
+                <option value="si">Sì, sono pronta/o a concludere</option>
+                <option value="forse">Forse, valuto in giornata</option>
+                <option value="no">No, mi serve tempo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="altribeni">Altri beni (argento, platino, monete, lingotti)?</label>
+              <select id="altribeni" name="altribeni">
+                <option value="no" selected>No</option>
+                <option value="si">Sì</option>
+              </select>
+            </div>
+            <div>
+              <label for="luxury">Orologi o gemme da valutare a parte?</label>
+              <select id="luxury" name="luxury">
+                <option value="no" selected>No</option>
+                <option value="si">Sì</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="reason">Motivo principale della vendita (opzionale)</label>
+            <select id="reason" name="reason">
+              <option value="">Seleziona…</option>
+              <option value="realizzo">Realizzo immediato</option>
+              <option value="disuso">Disuso</option>
+              <option value="eredita">Eredità</option>
+              <option value="altro">Altro</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="preferenza">Preferenza visita</label>
+              <select id="preferenza" name="preferenza">
+                <option value="qualsiasi" selected>Qualsiasi</option>
+                <option value="giorno">Giorno</option>
+                <option value="sera">Sera</option>
+                <option value="weekend">Week‑end</option>
+              </select>
+            </div>
+            <div>
+              <label for="note">Note (opzionale)</label>
+              <input id="note" name="note" placeholder="Es. accesso ZTL, citofono, orari"/>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:flex;gap:8px;align-items:flex-start">
+              <input type="checkbox" id="privacy" required style="width:18px;height:18px;margin-top:2px"/>
+              <span>Accetto l’uso dei miei dati per essere ricontattato. Ho letto l’informativa privacy. Per importi <strong>≥ 500 €</strong> useremo <strong>pagamenti tracciabili</strong> come da legge.</span>
+            </label>
+          </div>
+
+          <button class="btn" type="submit" aria-label="Invia richiesta">Prenota la valutazione</button>
+          <p id="formHint" class="legal">Compilando confermi di essere maggiorenne e residente nel Nord‑Est Italia.</p>
+        </form>
+      </aside>
+    </section>
+
+    <!-- TRUST / STAT -->
+    <section class="section">
+      <div class="grid">
+        <div class="stat"><h3>Pagamento Immediato</h3><p>Bonifico istantaneo, POS o assegno.</p></div>
+        <div class="stat"><h3>Prezzo Trasparente</h3><p>Da quotazione LBMA, €/g per titolo e spread chiaro.</p></div>
+        <div class="stat"><h3>Conforme alla Legge</h3><p>OAM A123 • TULPS Roma B12345 • Scheda con foto</p></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section card">
+      <h2 style="margin-top:0">Come funziona</h2>
+      <ol class="list" style="counter-reset:steps">
+        <li><span class="tick">✔</span> Prenoti giorno/orario. Copertura: Nord‑Est Italia.</li>
+        <li><span class="tick">✔</span> Arriviamo con bilancia certificata e facciamo test in tua presenza.</li>
+        <li><span class="tick">✔</span> Ti indichiamo €/g per titolo, quotazione del giorno e spread.</li>
+        <li><span class="tick">✔</span> Compiliamo <strong>scheda con foto</strong> e paghiamo <strong>immediatamente</strong>.</li>
+        <li><span class="tick">✔</span> Rispettiamo il <strong>fermo 10 giorni</strong> previsto dalla legge.</li>
+      </ol>
+    </section>
+
+    <!-- FAQ BREVI -->
+    <section class="section">
+      <h2>FAQ rapide</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Posso essere pagato in contanti?</strong>
+          <p class="legal">Per importi <strong>≥ 500 €</strong> solo mezzi tracciabili. Sotto 500 € il contante è consentito ma sconsigliato.</p>
+        </div>
+        <div class="card">
+          <strong>Che documenti servono?</strong>
+          <p class="legal">Documento d’identità e codice fiscale. Solo maggiorenni.</p>
+        </div>
+        <div class="card">
+          <strong>Trattate anche argento e platino?</strong>
+          <p class="legal">Sì, oltre all’oro valutiamo argento, platino, monete e lingotti.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container" role="contentinfo">
+    <div style="display:grid;gap:6px">
+      <div>© <span id="year"></span> <span id="legalName2">SandrOro Srl</span> — <span id="address">Via del Corso 12, Roma</span> • P.IVA <span id="piva">123456789</span> • REA <span id="rea">12345</span></div>
+      <div><span id="footerOAM">Iscrizione OAM A123 (cat.1)</span> • <span id="footerTULPS">Licenza TULPS Roma B12345 (01/01/2020) — Intestatario: Sandro DeNagris</span></div>
+      <div class="legal">Privacy & Cookie • Informativa antiriciclaggio (D.Lgs. 92/2017) • Esenzione IVA oro da investimento (L. 7/2000; DPR 633/72 art.10).</div>
+      <div class="legal">Per importi ≥ 500 € si applicano esclusivamente pagamenti tracciabili. Conserviamo la documentazione 10 anni.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Anno dinamico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Gestione submit (simulata o reale se CONFIG.FORM_ENDPOINT è impostato)
+    const form = document.getElementById('leadForm');
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if(!form.reportValidity()) return;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const lead = {
+        ...payload,
+        source: 'goldathome-landing',
+        url: location.href,
+        ts: new Date().toISOString()
+      };
+      // GTM dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_submit', lead });
+
+      if (CONFIG.FORM_ENDPOINT && CONFIG.FORM_ENDPOINT.length > 0) {
+        try {
+          const res = await fetch(CONFIG.FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(lead)
+          });
+          if (!res.ok) throw new Error('Invio non riuscito');
+          const txt = await res.text();
+          console.log('Lead inviata:', txt);
+        } catch (err) {
+          console.warn('Invio fallito, mostro comunque la conferma:', err);
+        }
+      }
+
+      form.outerHTML = `<div class="card" role="status"><h3>Grazie! 👋</h3><p>Abbiamo ricevuto la tua richiesta. Ti contatteremo a breve per confermare la visita.</p><p class="legal">Se hai urgenza chiama subito <a id="telSpan" href="tel:${CONFIG.PHONE_E164}">${CONFIG.PHONE.replace('+39 ','')}</a> o scrivi su <a id="waSpan" href="https://wa.me/${CONFIG.WHATSAPP_E164.replace('+','')}">WhatsApp</a>.</p></div>`;
+    });
+  </script>
+
+  <!-- JSON‑LD LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "name": "SandrOro – Compro Oro a Domicilio",
+    "slogan": "Oro come piace a te: sicuro a casa tua.",
+    "url": "https://www.sandroro.biz",
+    "telephone": "+39 333 162 1968",
+    "areaServed": "Nord-Est Italia",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via del Corso 12",
+      "addressLocality": "Roma",
+      "addressCountry": "IT"
+    },
+    "knowsAbout": ["compro oro", "oro da investimento", "valutazione oro", "servizio a domicilio", "LBMA"],
+    "paymentAccepted": ["Credit Card","Debit Card","Bank Transfer","Check","Cash (<500€)"],
+    "currenciesAccepted": "EUR"
+  }
+  </script>
+</body>
+</html>
