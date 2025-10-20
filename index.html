@@ -38,32 +38,49 @@
     .legal{font-size:12px;color:#94a3b8}
     .logos{display:flex;gap:10px;flex-wrap:wrap}
     .logos span{border:1px dashed #334155;border-radius:999px;padding:6px 10px;font-size:12px;color:#cbd5e1;background:#0b1220}
-    .ribbon{position:relative;overflow:visible;border-radius:16px}
-    
-.ribbon {
-  position: relative;
-  overflow: visible;
-  border-radius: 16px;
-}
+    .ribbon{position:relative;overflow:hidden;border-radius:16px}
+    .ribbon:before{content:"Sicuro a casa tua";position:absolute;top:14px;right:-48px;transform:rotate(35deg);background:#f59e0b;color:#111827;padding:6px 60px;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.25)}
     @media (max-width:900px){.hero{grid-template-columns:1fr}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
   
-@media (max-width:900px){
-  
-.ribbon {
-  position: relative;
-  overflow: visible;
-  border-radius: 16px;
+/* === Ribbon v3 (clean diagonal corner) === */
+.ribbon{position:relative;overflow:visible;border-radius:16px}
+.ribbon:before{
+  content:"Sicuro e riservato\A a casa tua!";
+  white-space:pre;
+  position:absolute;
+  top:10px; right:-80px;
+  transform:rotate(24deg);
+  display:block;
+  background:linear-gradient(180deg,#fbbf24,#f59e0b);
+  color:#0b1220;
+  padding:14px 110px;
+  font-weight:800;
+  font-size:17px;
+  line-height:1.2;
+  text-align:center;
+  letter-spacing:.3px;
+  border:1px solid #a16207;
+  border-radius:10px;
+  box-shadow:0 10px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  z-index:5;
+  pointer-events:none;
 }
+@media (max-width:900px){
+  .ribbon:before{
+    top:8px; right:-96px;
+    transform:rotate(26deg);
+    font-size:15px;
+    padding:10px 92px;
+  }
+}
+@media (max-width:560px){
+  .ribbon:before{
+    font-size:14px;
+    padding:8px 80px;
+    right:-102px;
+  }
 }
 
-.site-header{
-  position:sticky; top:0; z-index:50;
-  background:rgba(11,18,32,.85);
-  backdrop-filter:saturate(180%) blur(6px);
-  border-bottom:1px solid #273244;
-}
-.site-title{font-weight:800;font-size:18px;letter-spacing:.4px;color:#e2e8f0}
-@media (min-width:900px){ .site-title{font-size:20px} }
 </style>
   <!-- GTM/GA4 placeholders: sostituisci con i tuoi snippet
   <script>window.dataLayer = window.dataLayer || [];</script>
@@ -160,13 +177,7 @@
     });
   </script>
 </head>
-\1
-<header class="site-header">
-  <div class="container" style="display:flex;align-items:center;gap:12px;padding:14px 24px">
-    <div class="site-title">GoldAtHome</div>
-  </div>
-</header>
-
+<body>
   <header class="container" role="banner">
     <div class="badge" aria-label="Identità e conformità">
       <span id="legalName">SandrOro Srl</span>
