@@ -38,10 +38,46 @@
     .legal{font-size:12px;color:#94a3b8}
     .logos{display:flex;gap:10px;flex-wrap:wrap}
     .logos span{border:1px dashed #334155;border-radius:999px;padding:6px 10px;font-size:12px;color:#cbd5e1;background:#0b1220}
-    .ribbon{position:relative;overflow:hidden;border-radius:16px}
-    .ribbon:before{content:"Sicuro a casa tua";position:absolute;top:14px;right:-48px;transform:rotate(35deg);background:#f59e0b;color:#111827;padding:6px 60px;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+    .ribbon{position:relative;overflow:visible;border-radius:16px}
+    .ribbon:before{
+  content:"Sicuro a casa tua";
+  position:absolute;
+  top:16px;
+  right:-72px;
+  transform:rotate(32deg);
+  background:#f59e0b;         /* amber */
+  color:#0b1220;               /* very dark text for contrast */
+  padding:10px 96px;
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  border:2px solid #b45309;    /* darker amber border */
+  border-radius:6px;
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
+  pointer-events:none;
+  z-index:5;
+}
     @media (max-width:900px){.hero{grid-template-columns:1fr}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
-  </style>
+  
+@media (max-width:900px){
+  .ribbon:before{
+    top:12px;
+    right:-88px;
+    padding:8px 88px;
+    font-size:14px;
+  }
+}
+
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(11,18,32,.85);
+  backdrop-filter:saturate(180%) blur(6px);
+  border-bottom:1px solid #273244;
+}
+.site-title{font-weight:800;font-size:18px;letter-spacing:.4px;color:#e2e8f0}
+@media (min-width:900px){ .site-title{font-size:20px} }
+</style>
   <!-- GTM/GA4 placeholders: sostituisci con i tuoi snippet
   <script>window.dataLayer = window.dataLayer || [];</script>
   -->
@@ -137,7 +173,13 @@
     });
   </script>
 </head>
-<body>
+\1
+<header class="site-header">
+  <div class="container" style="display:flex;align-items:center;gap:12px;padding:14px 24px">
+    <div class="site-title">GoldAtHome</div>
+  </div>
+</header>
+
   <header class="container" role="banner">
     <div class="badge" aria-label="Identità e conformità">
       <span id="legalName">SandrOro Srl</span>
